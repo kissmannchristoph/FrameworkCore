@@ -1,29 +1,53 @@
-﻿using System.Runtime.ConstrainedExecution;
+﻿using FrameworkCore.Plugin;
 
 namespace FC_Module
 {
-    public abstract class Loader
+    public class Loader
     {
-        public List<ModuleClass> modules = new List<ModuleClass>();
+        private List<ModuleClass> modules = new List<ModuleClass>();
+
+        public List<ModuleClass> Modules
+        {
+            get { return this.modules; }
+        }
+
+        public Loader()
+        {
+            this.load();
+        }
+
+        private void load()
+        {
+
+        }
     }
 
-    public abstract class FrameworkCoreModule
+    public abstract class FrameworkCoreModule : Plugin
     {
+        protected FrameworkCoreModule(string name) : base(name)
+        {
+        }
+
         public void registerEvent()
         {
 
         }
 
-        public void 
+        public Loader getLoader()
+        {
+            return new Loader();
+        }
     }
 
-    public abstract class ModuleClass: FrameworkCoreModule
+    public abstract class ModuleClass : Pl
     {
         int id;
         string name;
         string art;
 
-        
+        protected ModuleClass(string name) : base(name)
+        {
+        }
     }
 
 }
