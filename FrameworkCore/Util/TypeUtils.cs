@@ -9,10 +9,11 @@ namespace FrameworkCore.Util
 {
     public class TypeUtils
     {
-        public static T? ReType<T>(object obj)
+        public static T ReType<T>(object obj)
         {
-            string stringifyd = JsonConvert.SerializeObject(obj);
-            return JsonConvert.DeserializeObject<T>(stringifyd);
+            //var stringifyd = JsonConvert.SerializeObject(obj);
+            //return JsonConvert.DeserializeObject<T>(stringifyd)!;
+            return (T)obj;
         }
     }
 }

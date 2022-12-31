@@ -10,5 +10,6 @@ namespace FrameworkCore.Event
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public class EventHandler : Attribute
     {
+        
     }
 }

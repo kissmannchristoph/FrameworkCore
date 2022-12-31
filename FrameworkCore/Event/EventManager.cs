@@ -6,11 +6,11 @@ namespace FrameworkCore.Event
 {
     public class EventManager
     {
-        private List<EventContext> eventContexts = new List<EventContext>();
+        private readonly List<EventContext> eventContexts = new List<EventContext>();
 
         public EventManager()
         {
-
+            
         }
 
         public EventContext GetEventContext(string name = "default")
@@ -52,6 +52,7 @@ namespace FrameworkCore.Event
     }
 
     public interface Listener { }
+
 
 
 }

@@ -35,15 +35,21 @@ namespace FrameworkCore.State
         }
     }
 
-    public class State
+    public class StateContext
     {
+        public readonly string Name;
         Dictionary<string, object> data = new Dictionary<string, object>();
         List<StateWatch> stateWatches = new List<StateWatch>();
+
+        public StateContext(string name)
+        {
+            this.Name = name;
+        }
 
         private StateWatchCheck isWatch(string index)
         {
             bool exists = this.stateWatches.Find((StateWatch stateWatch) => stateWatch.Index.Equals(index)) != null;
-            StateWatchCheck stateWatchCheck = new StateWatchCheck(this.stateWatches.Find((StateWatch stateWatch) => stateWatch.Index.Equals(index));
+            StateWatchCheck stateWatchCheck = new StateWatchCheck(this.stateWatches.Find((StateWatch stateWatch) => stateWatch.Index.Equals(index)));
             return stateWatchCheck;
         }
 
@@ -55,6 +61,11 @@ namespace FrameworkCore.State
         private object get(string index)
         {
             return this.data[index];
+        }
+
+        public void RegisterWatch(string index, EventContext eventContext, string eventName)
+        {
+            this.registerWatch(index, eventContext, eventName);
         }
 
         public T Get<T>(string index)

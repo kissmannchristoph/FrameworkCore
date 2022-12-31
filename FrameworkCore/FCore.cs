@@ -7,9 +7,9 @@ namespace FrameworkCore
 
     public class FCore
     {
-        public EventManager EventManagerContext { get; } = new EventManager();
-        public PluginManager PluginManagerContext { get; } = new PluginManager();
-        public StateManager StateManagerContext { get; } = new StateManager();
+        public EventManager EventManager { get; } = new EventManager();
+        public PluginManager PluginManager { get; } = new PluginManager();
+        public StateManager StateManager { get; } = new StateManager();
 
         private FCore() { }
 

@@ -45,12 +45,12 @@ namespace FrameworkCore.Plugin
             }
         }
 
-        public Plugin? GetPlugin<T>(string name)
+        public T? GetPlugin<T>(string name)
         {
             var plugin = this.plugins.Find((Plugin plugin) => plugin.Name.Equals(name));
 
             if (plugin == null)
-                return null;
+                return default(T);
 
             return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(this.plugins.Find((Plugin plugin) => plugin.Name.Equals(name))));
         }
