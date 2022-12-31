@@ -1,26 +1,10 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Net.Http.Json;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using JsonConverter = Newtonsoft.Json.JsonConverter;
 using JsonConverterAttribute = System.Text.Json.Serialization.JsonConverterAttribute;
 
 namespace FrameworkCore.Event
 {
-    [JsonConverter(typeof(EventContext))]
-    abstract class EventContext
-    {
-        public readonly string name;
-        public Listener listener;
-    }
-
-    internal class EventManager
+    public class EventManager
     {
         private List<EventContext> eventContexts = new List<EventContext>();
 
@@ -49,9 +33,9 @@ namespace FrameworkCore.Event
             string json = @"
         
             {
-            ""name"": ""+name+"",
-""listener"": ""[]""
-                
+                ""name"": ""+name+"",
+                ""listener"": ""[]""
+           
             }
         "
             ;

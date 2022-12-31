@@ -1,4 +1,4 @@
-﻿using System.Runtime.ConstrainedExecution;
+﻿using FrameworkCore.Plugin;
 
 namespace FC_Module
 {
@@ -22,8 +22,12 @@ namespace FC_Module
         }
     }
 
-    public abstract class FrameworkCoreModule
+    public abstract class FrameworkCoreModule : Plugin
     {
+        protected FrameworkCoreModule(string name) : base(name)
+        {
+        }
+
         public void registerEvent()
         {
 
@@ -32,16 +36,18 @@ namespace FC_Module
         public Loader getLoader()
         {
             return new Loader();
-        } 
+        }
     }
 
-    public abstract class ModuleClass: FrameworkCoreModule
+    public abstract class ModuleClass : Pl
     {
         int id;
         string name;
         string art;
 
-        
+        protected ModuleClass(string name) : base(name)
+        {
+        }
     }
 
 }

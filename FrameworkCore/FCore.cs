@@ -1,17 +1,22 @@
 ﻿using FrameworkCore.Event;
-using System.Runtime.CompilerServices;
+using FrameworkCore.Plugin;
+using FrameworkCore.State;
 
 namespace FrameworkCore
 {
-   
+
     public class FCore
     {
-       readonly EventManager eventManager;
+        public EventManager EventManagerContext { get; } = new EventManager();
+        public PluginManager PluginManagerContext { get; } = new PluginManager();
+        public StateManager StateManagerContext { get; } = new StateManager();
 
-       public FCore()
-       {
-            this.eventManager = new EventManager();
-       }
+        private FCore() { }
+
+        public static FCore Create()
+        {
+            return new FCore();
+        }
 
     }
 }

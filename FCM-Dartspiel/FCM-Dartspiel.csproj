@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FC Module\FC Module.csproj" />
+    <ProjectReference Include="..\FrameworkCore\FrameworkCore.csproj" />
   </ItemGroup>
 
 </Project>
