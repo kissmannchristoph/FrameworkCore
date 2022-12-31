@@ -58,6 +58,7 @@ namespace FrameworkCore.Event
 
             EventContext eventContext = JsonConvert.DeserializeObject<EventContext>(json);
             return eventContext;
+
             /*  string serializedAgain = JsonConvert.SerializeObject(list);
             Debug.WriteLine(serializedAgain);
 
