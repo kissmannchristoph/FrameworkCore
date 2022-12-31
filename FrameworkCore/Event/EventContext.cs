@@ -100,8 +100,10 @@ namespace FrameworkCore.Event
                    if (parameterInfo.Member.GetCustomAttributes<EventHandler>().ToArray().Length > 0)
                     {
                         //Action action = (Action) Delegate.CreateDelegate(typeof(Action), listener, methodInfo);
-                        object iead = JSON.Parse<object>("{'listener': '" + listener + "', 'methodInfo': '" + methodInfo + "'}")!;
-                        eventActionsDatas.Add(JsonConvert.DeserializeObject<IEventActionsData>(JsonConvert.SerializeObject((object)iead)));
+                        
+                        //var iead = JSON.Parse<IEventActionsData>("{'listener': '" + JsonConvert.SerializeObject(listener) + "', 'methodInfo': '" + JsonConvert.SerializeObject(methodInfo) + "'}")!;
+                        eventActionsDatas.Add(new IEventActionsData() { listener = listener, methodInfo = methodInfo });
+                        //eventActionsDatas.Add(JsonConvert.DeserializeObject<IEventActionsData>(JsonConvert.SerializeObject((object)iead)));
                     }
                 }
             }

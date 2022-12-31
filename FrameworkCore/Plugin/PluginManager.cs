@@ -1,14 +1,20 @@
 ﻿using Newtonsoft.Json;
 using System.Reflection;
-
+using System;
+using System.Collections;
 namespace FrameworkCore.Plugin
 {
     public class PluginManager
     {
         List<Plugin> plugins = new List<Plugin>();
-        public PluginManager()
+
+        private readonly Base FCoreBase;
+
+        public PluginManager(Base fCoreBase)
         {
+            this.FCoreBase = fCoreBase;
             this.loadPlugins(plugins);
+           
         }
 
         public override string ToString()
@@ -21,11 +27,19 @@ namespace FrameworkCore.Plugin
             string path = Path.Combine(Directory.GetCurrentDirectory(), "plugins");
 
             //check dir exists
-            if (!Directory.Exists(path))
+           try
+            {
+if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
                 return;
             }
+            } catch (Exception sOE)
+            {
+                Directory.CreateDirectory(path);
+                return;
+            }
+            
 
             string[] files = Directory.GetFiles(path, "*.dll");
 
@@ -37,6 +51,7 @@ namespace FrameworkCore.Plugin
                     if (typeof(Plugin).IsAssignableFrom(type.BaseType))
                     {
                         Plugin plugin = (Plugin) Activator.CreateInstance(type);
+                        plugin.FCoreBase = this.FCoreBase;
                         plugin.OnLoad();
                         this.plugins.Add(plugin);
                         break;
@@ -45,14 +60,14 @@ namespace FrameworkCore.Plugin
             }
         }
 
-        public T? GetPlugin<T>(string name)
+        public T GetPlugin<T>(string name)
         {
-            var plugin = this.plugins.Find((Plugin plugin) => plugin.Name.Equals(name));
+            object plugin = this.plugins.Find((Plugin plugin) => plugin.Name.Equals(name));
 
             if (plugin == null)
                 return default(T);
 
-            return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(this.plugins.Find((Plugin plugin) => plugin.Name.Equals(name))));
+            return (T)plugin;
         }
     }
 }

@@ -39,13 +39,13 @@ namespace FC_Module
         }
     }
 
-    public abstract class ModuleClass : Pl
+    public abstract class ModuleClass 
     {
         int id;
         string name;
         string art;
 
-        protected ModuleClass(string name) : base(name)
+        protected ModuleClass(string name)
         {
         }
     }

@@ -1,4 +1,5 @@
 ﻿using FrameworkCore.Plugin;
+using FrameworkCore;
 
 namespace FCM_Dartspiel
 {
@@ -6,11 +7,12 @@ namespace FCM_Dartspiel
     {
         public Dartspiel() : base("Dart")
         {
-
+            
         }
 
         public override bool OnStart()
         {
+            this.FCoreBase.StateManager.GetStateContext();
             throw new NotImplementedException();
         }
 

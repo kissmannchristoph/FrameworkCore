@@ -5,11 +5,8 @@ using FrameworkCore.State;
 namespace FrameworkCore
 {
 
-    public class FCore
+    public class FCore: FCoreBase
     {
-        public EventManager EventManager { get; } = new EventManager();
-        public PluginManager PluginManager { get; } = new PluginManager();
-        public StateManager StateManager { get; } = new StateManager();
 
         private FCore() { }
 

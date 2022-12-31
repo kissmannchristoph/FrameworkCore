@@ -3,6 +3,8 @@ using FrameworkCore.Event;
 using EventHandler = FrameworkCore.Event.EventHandler;
 using Event = FrameworkCore.Event.Event;
 using Listener = FrameworkCore.Event.Listener;
+using FrameworkCore.Plugin;
+
 namespace FrameworkCoreModuleHubServer
 {
     class TestEvent: Event
@@ -11,17 +13,17 @@ namespace FrameworkCoreModuleHubServer
 
         public override void After()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public override void Bevore()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public override void Run()
         {
-            throw new NotImplementedException();
+           // throw new NotImplementedException();
         }
     }
     internal class L1: Listener
@@ -41,14 +43,14 @@ namespace FrameworkCoreModuleHubServer
         {
             this.fcore = FCore.Create();
             this.defaultEventContext = this.fcore.EventManager.GetEventContext();
-            this.defaultEventContext.FireEvent(new TestEvent());
+            this.fcore.GetPlugin<Plugin>("Dart").OnUnload();
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             this.defaultEventContext.RegisterListener(new L1());
-            this.defaultEventContext.FireEvent(new TestEvent());
+ 
             MessageBox.Show(this.fcore.PluginManager.ToString());
         }
     }

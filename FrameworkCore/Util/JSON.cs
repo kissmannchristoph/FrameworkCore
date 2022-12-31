@@ -10,7 +10,7 @@ namespace FrameworkCore.Util
 {
     internal class JSON
     {
-        public static T? Parse<T>(string json)
+        public static T Parse<T>(string json)
         {
             return JsonConvert.DeserializeObject<T>(json);
         }
