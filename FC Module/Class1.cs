@@ -2,9 +2,24 @@
 
 namespace FC_Module
 {
-    public abstract class Loader
+    public class Loader
     {
-        public List<ModuleClass> modules = new List<ModuleClass>();
+        private List<ModuleClass> modules = new List<ModuleClass>();
+
+        public List<ModuleClass> Modules
+        {
+            get { return this.modules; }
+        }
+
+        public Loader()
+        {
+            this.load();
+        }
+
+        private void load()
+        {
+
+        }
     }
 
     public abstract class FrameworkCoreModule
@@ -14,7 +29,10 @@ namespace FC_Module
 
         }
 
-        public void 
+        public Loader getLoader()
+        {
+            return new Loader();
+        } 
     }
 
     public abstract class ModuleClass: FrameworkCoreModule
