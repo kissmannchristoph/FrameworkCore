@@ -1,0 +1,23 @@
+FrameworkCore Module txrx Protocol -> WLan, Bluetooth
+
+
+ping server port = 2556*;
+data server port = 2555*;
+
+Master:
+	ping server tcp 25566
+	data server tcp 25556
+	
+Slave: 
+	ping server tcp 25565
+	data server tcp 25555
+
+-> MasterPings:
+	ping = req{'type': 'ping'}  res {'type': 'ping', 'module': 'slaveModuleName'}
+	dataSend = req {'type': 'data', ...data} res {'type': 'data', ...data}
+	requiredParameter = {'type': 'data', 'name': 'moduleName', [...data]}
+
+-> Slave Pings:
+	ping = req{'type': 'ping'}  res {'type': 'ping', 'module': 'slaveModuleName'}
+	dataSend = req {'type': 'data', ...data} res {'type': 'data', ...data}
+	requiredParameter = {'type': 'data', 'name': 'moduleName', [...data]}

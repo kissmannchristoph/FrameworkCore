@@ -8,7 +8,7 @@ namespace FrameworkCore.Net
         Server, Client
     }
 
-    public interface ITCPEndpointData
+    public class ITCPEndpointData
     {
         int port;
         string ipaddress;
@@ -56,14 +56,60 @@ namespace FrameworkCore.Net
         {
             this.serverSocket = new TcpListener(port);
 
-            Console.WriteLine("Chat Server Started ....");
+
+            var connection = (TcpClient clientSocket) =>
+            {
+
+            };
+
+
+            var loop = () => { };
+            
+            loop = () =>
+            {
+
+                TcpClient clientSocket = serverSocket.AcceptTcpClient();
+
+
+                Thread connectionThread = new Thread(
+                new ThreadStart(() => connection(clientSocket)));
+                connectionThread.Start();
+
+                if (run)
+                {
+                    loop();
+                } else
+                {
+
+                    clientSocket.Close();
+                    serverSocket.Stop();
+                    Console.WriteLine("exit");
+                    Console.ReadLine();
+                }
+            };
+
+            Thread loopThread = new Thread(
+            new ThreadStart(loop));
+            loopThread.Start();
+            /*    Console.WriteLine("Chat Server Started ....");
             Thread InstanceCaller = new Thread(
             new ThreadStart(() =>
             {
-
-            while ((/*true*/run))
+            }));
+            while ((/*truerun))
             {
                 TcpClient clientSocket = serverSocket.AcceptTcpClient();
+
+                    var loop = () =>
+                    {
+                        if (run)
+                            loop();
+                    };
+
+                    var connection = (TcpClient clientSocket) =>
+                    {
+
+                    };
 
                 byte[] bytesFrom = new byte[10025];
                 string dataFromClient = null;
@@ -79,7 +125,7 @@ namespace FrameworkCore.Net
             serverSocket.Stop();
             Console.WriteLine("exit");
             Console.ReadLine();
-            }));
+            }));*/
 
             
         }

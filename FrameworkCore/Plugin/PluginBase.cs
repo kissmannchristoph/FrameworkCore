@@ -3,6 +3,7 @@
 using FrameworkCore.State;
 
 using FrameworkCore.Plugin;
+using FrameworkCore.Module;
 
 namespace FrameworkCore
 {
@@ -11,13 +12,16 @@ namespace FrameworkCore
         public readonly EventManager EventManager;
         public readonly PluginManager PluginManager;
         public readonly StateManager StateManager;
-        public Base(bool isPlugin = false)
+        public readonly ModuleManager ModuleManager;
+
+        public Base(bool isPlugin = false, ModuleType? moduleType = null)
         {
 
             this.EventManager = new EventManager();
             if (!isPlugin)
                 this.PluginManager = new PluginManager(this);
             this.StateManager = new StateManager();
+            this.ModuleManager = new ModuleManager(this);
         }
 
         public T GetPlugin<T>(string name)
